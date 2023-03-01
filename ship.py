@@ -12,10 +12,13 @@ class Ship: #a class to manage the ship
         
         #Movement flag
         self.moving_right = False
+        self.moving_left = False
 
     def update(self): #to update the ship's position based on the movement flag
         if self.moving_right:
             self.rect.x += 1
+        if self.moving_left:
+            self.rect.x -= 1
 
     def blitme(self): #to draw the ship at its current location
         self.screen.blit(self.image, self.rect)
