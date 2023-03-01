@@ -27,11 +27,7 @@ class AlienInvasion: #Overall class to manage game assets and behavior
         while True: #manages screen updates, runs continually
             self._check_events()
             self.ship.update()
-            self.bullets.update()
-            for bullet in self.bullets.copy():
-                if bullet.rect.bottom <= 0:
-                    self.bullets.remove(bullet)
-                    #print(len(self.bullets))
+            self._update_bullets()
             self._update_screen()
 
     def _check_events(self): #responds to keypresses and mouse events
@@ -63,6 +59,15 @@ class AlienInvasion: #Overall class to manage game assets and behavior
         if len(self.bullets) < self.settings.bullets_allowed:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        self.bullets.update() #to update bullet positions
+
+        for bullet in self.bullets.copy():
+                if bullet.rect.bottom <= 0:
+                    self.bullets.remove(bullet)
+                    
+
 
 
     def _update_screen(self): #to update images on the screen, and flip to the new screen
