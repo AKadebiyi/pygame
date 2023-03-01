@@ -7,7 +7,7 @@ from settings import Settings #importing Settings
 class AlienInvasion: #Overall class to manage game assets and behavior
     def __init__(self): #Initialize the game, and create game resources
         pygame.init() #initializes the background settings
-        self.settings = Settings()
+        self.settings = Settings() #creates an instance of Settings
         self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height)) #to create a display window for all the game's graphical elements, called a surface, available in all methods in the class
         pygame.display.set_caption("Alien Invasion")
 
