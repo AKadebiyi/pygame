@@ -10,7 +10,9 @@ class AlienInvasion: #Overall class to manage game assets and behavior
     def __init__(self): #Initialize the game, and create game resources
         pygame.init() #initializes the background settings
         self.settings = Settings() #creates an instance of Settings
-        self.screen = pygame.display.set_mode((self.settings.screen_width,self.settings.screen_height)) #to create a display window for all the game's graphical elements, called a surface, available in all methods in the class
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN) #to create a display window for all the game's graphical elements, called a surface, available in all methods in the class
+        self.settings.screen_width = self.screen.get_rect().width
+        self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self) #creates an instance of Ship
