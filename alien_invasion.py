@@ -20,6 +20,7 @@ class AlienInvasion: #Overall class to manage game assets and behavior
     def run_game(self): #Start the main loop for the game
         while True: #manages screen updates, runs continually
             self._check_events()
+            self.ship.update()
             self._update_screen()
 
     def _check_events(self): #responds to keypresses and mouse events
@@ -28,7 +29,10 @@ class AlienInvasion: #Overall class to manage game assets and behavior
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RIGHT:
-                    self.ship.rect.x += 1 #to move the ship to the right
+                    self.ship.moving_right = True
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = False
 
     def _update_screen(self): #to update images on the screen, and flip to the new screen
             self.screen.fill(self.settings.bg_color) #to fill the background and redraw the screen during each pass thru the loop
