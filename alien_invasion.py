@@ -26,6 +26,9 @@ class AlienInvasion: #Overall class to manage game assets and behavior
         for event in pygame.event.get(): #accessor method that pygame uses to access events it detects
             if event.type == pygame.QUIT: 
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.rect.x += 1 #to move the ship to the right
 
     def _update_screen(self): #to update images on the screen, and flip to the new screen
             self.screen.fill(self.settings.bg_color) #to fill the background and redraw the screen during each pass thru the loop
