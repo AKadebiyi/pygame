@@ -1,7 +1,7 @@
 import pygame
 
 class Ship: #a class to manage the ship
-    def __init__(self,ai_game): #to initialize the ship and set its starting position. ai game will give ship access to all the resources of alien invasion
+    def __init__(self, ai_game): #to initialize the ship and set its starting position. ai game will give ship access to all the resources of alien invasion
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()
@@ -19,9 +19,9 @@ class Ship: #a class to manage the ship
 
     def update(self): #to update the ship's position based on the movement flag
         if self.moving_right and self.rect.right < self.screen_rect.right:
-            self.rect.x += self.settings.ship_speed
+            self.x += self.settings.ship_speed
         if self.moving_left and self.rect.left > 0:
-            self.rect.x -= self.settings.ship_speed
+            self.x -= self.settings.ship_speed
 
         self.rect.x = self.x #update rect object from self.x
 
