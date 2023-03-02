@@ -38,9 +38,12 @@ class AlienInvasion: #Overall class to manage game assets and behavior
     def run_game(self): #Start the main loop for the game
         while True: #manages screen updates, runs continually
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+
+            if self.stats.game_active: #to identify the parts that should run only when the game is active
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
+
             self._update_screen()
 
     def _check_events(self): #responds to keypresses and mouse events
@@ -132,15 +135,18 @@ class AlienInvasion: #Overall class to manage game assets and behavior
         self._check_aliens_bottom() #to look for aliens hitting the bottom of the screen
 
     def _ship_hit(self): #respond to the ship being hit by an alien
-        self.stats.ships_left -= 1 #decrements ships_left
-        
-        self.aliens.empty() #to get rid of any remaining aliens and bullets
-        self.bullets.empty()
+        if self.stats.ships_left > 0:
+            self.stats.ships_left -= 1 #decrements ships_left
+            
+            self.aliens.empty() #to get rid of any remaining aliens and bullets
+            self.bullets.empty()
 
-        self._create_fleet() #to create a new fleet and center the ship
-        self.ship.center_ship()
+            self._create_fleet() #to create a new fleet and center the ship
+            self.ship.center_ship()
 
-        sleep(0.5) #to pause
+            sleep(0.5) #to pause
+        else:
+            self.stats.game_active = False
 
     def _check_aliens_bottom(self): #to check if any aliens have reached the bottom of the screen
         screen_rect = self.screen.get_rect()
