@@ -73,6 +73,8 @@ class AlienInvasion: #Overall class to manage game assets and behavior
         for bullet in self.bullets.copy():
                 if bullet.rect.bottom <= 0:
                     self.bullets.remove(bullet)
+
+        collissions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
                     
     def _create_fleet(self): #to create a fleet
         alien = Alien(self) #to make an alien
