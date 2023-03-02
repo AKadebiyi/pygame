@@ -178,6 +178,7 @@ class AlienInvasion: #Overall class to manage game assets and behavior
 
             self.stats.reset_stats() #to reset the game statistics
             self.stats.game_active = True 
+            self.sb.prep_score() #to prep the score when starting a new game
 
             #to get rid of any remaining aliens and bullets
             self.aliens.empty()
