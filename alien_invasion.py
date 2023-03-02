@@ -166,6 +166,8 @@ class AlienInvasion: #Overall class to manage game assets and behavior
     def _check_play_button(self, mouse_pos): #to start a new game when the player clicks the Play button
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
+            self.settings.initialize_dynamic_settings() #to reset the game settings
+
             self.stats.reset_stats() #to reset the game statistics
             self.stats.game_active = True 
 
