@@ -28,3 +28,7 @@ class Ship: #a class to manage the ship
     def blitme(self): #to draw the ship at its current location
         self.screen.blit(self.image, self.rect)
 
+    def center_ship(self): #to center the ship on the screen
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
+

@@ -1,8 +1,12 @@
 import sys #contains tools to exit the game when the player quits
 
+from time import sleep
+
 import pygame #contains the functionality we need to make the game
 
 from settings import Settings #importing Settings
+
+from game_stats import GameStats
 
 from ship import Ship
 
@@ -18,6 +22,8 @@ class AlienInvasion: #Overall class to manage game assets and behavior
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
+
+        self.stats = GameStats(self)
 
         self.ship = Ship(self) #creates an instance of Ship
 
@@ -121,8 +127,18 @@ class AlienInvasion: #Overall class to manage game assets and behavior
         self.aliens.update()
 
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print("Ship hit!!!")
+            self._ship_hit()
 
+    def _ship_hit(self): #respond to the ship being hit by an alien
+        self.stats.ships_left -= 1 #decrements ships_left
+        
+        self.aliens.empty() #to get rid of any remaining aliens and bullets
+        self.bullets.empty()
+
+        self._create_fleet() #to create a new fleet and center the ship
+        self.ship.center_ship()
+
+        sleep(0.5) #to pause
 
     def _update_screen(self): #to update images on the screen, and flip to the new screen
             self.screen.fill(self.settings.bg_color) #to fill the background and redraw the screen during each pass thru the loop
