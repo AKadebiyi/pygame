@@ -7,7 +7,7 @@ class Settings: #class to store all settings for Alien Invasion
         self.ship_speed = 1.5 #changing it from 1 pixel movement to 1.5 pixel
 
         #Bullet settings
-        self.bullet_speed = 1.0
+        self.bullet_speed = 1.5
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (60,60,60)

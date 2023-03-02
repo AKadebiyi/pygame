@@ -75,6 +75,10 @@ class AlienInvasion: #Overall class to manage game assets and behavior
                     self.bullets.remove(bullet)
 
         collissions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+
+        if not self.aliens: #destroy existing bullets and create new fleet
+            self.bullets.empty()
+            self._create_fleet()
                     
     def _create_fleet(self): #to create a fleet
         alien = Alien(self) #to make an alien
