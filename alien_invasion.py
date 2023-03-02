@@ -75,18 +75,24 @@ class AlienInvasion: #Overall class to manage game assets and behavior
                     
     def _create_fleet(self): #to create a fleet
         alien = Alien(self) #to make an alien
-        alien_width = alien.rect.width
+        alien_width, alien_height = alien.rect.size
         available_space_x = self.settings.screen_width - (2 * alien_width) #spacing between each alien is one alien width
         number_aliens_x = available_space_x // (2 * alien_width)
 
-        for alien_number in range(number_aliens_x): #to create the first row of aliens
-            self._create_alien(alien_number)
+        ship_height = self.ship.rect.height #to determine the number of rows of aliens that fit on the screen
+        available_space_y = (self.settings.screen_height - (3 * alien_height) - ship_height)
+        number_rows = available_space_y // (2 * alien_height)
 
-    def _create_alien(self, alien_number):
+        for row_number in range(number_rows): #to create the full fleet of aliens
+            for alien_number in range(number_aliens_x):
+                self._create_alien(alien_number, row_number)
+
+    def _create_alien(self, alien_number, row_number):
             alien = Alien(self) #to create an alien and place it in the row
-            alien_width = alien.rect.width
+            alien_width, alien_height = alien.rect.size
             alien.x = alien_width + (2 * alien_width * alien_number)
             alien.rect.x = alien.x
+            alien.rect.y = alien.rect.height + (2 * alien.rect.height * row_number)
             self.aliens.add(alien)
 
 
