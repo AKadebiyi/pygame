@@ -96,6 +96,7 @@ class AlienInvasion: #Overall class to manage game assets and behavior
         if not self.aliens: #destroy existing bullets and create new fleet
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
                     
     def _create_fleet(self): #to create a fleet
         alien = Alien(self) #to make an alien
