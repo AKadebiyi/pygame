@@ -8,6 +8,8 @@ from settings import Settings #importing Settings
 
 from game_stats import GameStats
 
+from scoreboard import Scoreboard
+
 from button import Button
 
 from ship import Ship
@@ -25,7 +27,9 @@ class AlienInvasion: #Overall class to manage game assets and behavior
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
 
+        #to create an instance to store game stats; and create a scoreboard
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
         self.ship = Ship(self) #creates an instance of Ship
 
@@ -189,6 +193,8 @@ class AlienInvasion: #Overall class to manage game assets and behavior
                 bullet.draw_bullet()
 
             self.aliens.draw(self.screen)
+
+            self.sb.show_score() #to draw the score info
 
             if not self.stats.game_active: #to draw the play button if the game is inactive
                 self.play_button.draw_button()

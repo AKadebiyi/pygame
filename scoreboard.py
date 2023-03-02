@@ -16,7 +16,7 @@ class Scoreboard: # a class to report scoring info
 
     def prep_score(self): #to turn the score in to a rendered image
         score_str = str(self.stats.score)
-        self.score.image = self.font.render(score_str, True, self.text_color, self.settings.bg_color)
+        self.score_image = self.font.render(score_str, True, self.text_color, self.settings.bg_color)
 
         #to display the score at the top right of the screen
         self.score_rect = self.score_image.get_rect()
