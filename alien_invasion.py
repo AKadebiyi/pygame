@@ -88,6 +88,17 @@ class AlienInvasion: #Overall class to manage game assets and behavior
             for alien_number in range(number_aliens_x):
                 self._create_alien(alien_number, row_number)
 
+    def _check_fleet_edges(self): #to respond appropriately if any aliens have reached an edge
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+
+    def _change_fleet_direction(self): #to drop the entire fleet and change the fleet's direction
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
+
     def _create_alien(self, alien_number, row_number):
             alien = Alien(self) #to create an alien and place it in the row
             alien_width, alien_height = alien.rect.size
@@ -97,6 +108,7 @@ class AlienInvasion: #Overall class to manage game assets and behavior
             self.aliens.add(alien)
 
     def _update_aliens(self): #to update the positions of all aliens in the fleet
+        self._check_fleet_edges() #to check if the fleet is at an edge, then updating the positions of all aliens in the fleet
         self.aliens.update()
 
 
