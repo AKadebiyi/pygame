@@ -97,6 +97,10 @@ class AlienInvasion: #Overall class to manage game assets and behavior
     def _check_bullet_alien_collissions(self): #to respond to bullet/alien collisions
         collissions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True) #to remove any bullets and aliens that have collided
 
+        if collissions:
+            self.stats.score += self.settings.alien_points
+            self.sb.prep_score()
+
         if not self.aliens: #destroy existing bullets and create new fleet
             self.bullets.empty()
             self._create_fleet()

@@ -29,6 +29,8 @@ class Settings: #class to store all settings for Alien Invasion
 
         self.fleet_direction = 1 #fleet direction of 1 reps right; -1 reps left
 
+        self.alien_points = 50 #scoring
+
     def increase_speed(self): #increased speed settings
         self.ship_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
