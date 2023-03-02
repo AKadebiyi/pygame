@@ -102,11 +102,16 @@ class AlienInvasion: #Overall class to manage game assets and behavior
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
             self.sb.check_high_score()
+            self.prep_level()
 
         if not self.aliens: #destroy existing bullets and create new fleet
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
+
+            #to increase level
+            self.stats.level += 1
+            self.sb.prep_level()
                     
     def _create_fleet(self): #to create a fleet
         alien = Alien(self) #to make an alien
@@ -181,6 +186,7 @@ class AlienInvasion: #Overall class to manage game assets and behavior
             self.stats.reset_stats() #to reset the game statistics
             self.stats.game_active = True 
             self.sb.prep_score() #to prep the score when starting a new game
+            self.sb.prep_level() #to ensure level image update sproperly at the start of a new game
 
             #to get rid of any remaining aliens and bullets
             self.aliens.empty()
