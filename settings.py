@@ -6,7 +6,7 @@ class Settings: #class to store all settings for Alien Invasion
         self.bg_color = (230,230,230)
 
         #Bullet settings
-        self.bullet_width = 300
+        self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = (60,60,60)
         self.bullets_allowed = 3 #limits the number of bullets to 3 at a time
@@ -20,6 +20,8 @@ class Settings: #class to store all settings for Alien Invasion
 
         self.speedup_scale = 1.1 #how quickly the game speeds up
 
+        self.score_scale = 1.5 #how quickly the alien point values increase
+
         self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self): #to initialize settings that change throughout the game
@@ -31,7 +33,10 @@ class Settings: #class to store all settings for Alien Invasion
 
         self.alien_points = 50 #scoring
 
-    def increase_speed(self): #increased speed settings
+    def increase_speed(self): #increased speed settings and alien point values
         self.ship_speed *= self.speedup_scale
         self.bullet_speed *= self.speedup_scale
         self.alien_speed *= self.speedup_scale
+
+        self.alien_points = int(self.alien_points * self.score_scale)
+        print(self.alien_points)
