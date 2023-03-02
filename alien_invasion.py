@@ -163,7 +163,15 @@ class AlienInvasion: #Overall class to manage game assets and behavior
 
     def _check_play_button(self, mouse_pos): #to start a new game when the player clicks the Play button
         if self.play_button.rect.collidepoint(mouse_pos):
+            self.stats.reset_stats() #to reset the game statistics
             self.stats.game_active = True 
+
+            #to get rid of any remaining aliens and bullets
+            self.aliens.empty()
+            self.bullets.empty()
+
+            self._create_fleet() #to create a new fleet
+            self.ship.center_ship() #to center the ship
 
     def _update_screen(self): #to update images on the screen, and flip to the new screen
             self.screen.fill(self.settings.bg_color) #to fill the background and redraw the screen during each pass thru the loop
