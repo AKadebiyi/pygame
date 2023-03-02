@@ -152,6 +152,7 @@ class AlienInvasion: #Overall class to manage game assets and behavior
             sleep(0.5) #to pause
         else:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True) #to make the cursor visible once game becomes inactive like when ship is hit
 
     def _check_aliens_bottom(self): #to check if any aliens have reached the bottom of the screen
         screen_rect = self.screen.get_rect()
@@ -173,6 +174,8 @@ class AlienInvasion: #Overall class to manage game assets and behavior
 
             self._create_fleet() #to create a new fleet
             self.ship.center_ship() #to center the ship
+
+            pygame.mouse.set_visible(False) #to hide the cursor when game is active
 
     def _update_screen(self): #to update images on the screen, and flip to the new screen
             self.screen.fill(self.settings.bg_color) #to fill the background and redraw the screen during each pass thru the loop
