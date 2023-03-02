@@ -14,6 +14,7 @@ class Scoreboard: # a class to report scoring info
         #prepare the initial score image
         self.prep_score()
         self.prep_high_score()
+        self.prep_level()
 
     def prep_score(self): #to turn the score in to a rendered image
         rounded_score = round(self.stats.score, -1)
