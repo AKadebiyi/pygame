@@ -120,6 +120,9 @@ class AlienInvasion: #Overall class to manage game assets and behavior
         self._check_fleet_edges() #to check if the fleet is at an edge, then updating the positions of all aliens in the fleet
         self.aliens.update()
 
+        if pygame.sprite.spritecollideany(self.ship, self.aliens):
+            print("Ship hit!!!")
+
 
     def _update_screen(self): #to update images on the screen, and flip to the new screen
             self.screen.fill(self.settings.bg_color) #to fill the background and redraw the screen during each pass thru the loop
