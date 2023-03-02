@@ -8,6 +8,8 @@ from settings import Settings #importing Settings
 
 from game_stats import GameStats
 
+from button import Button
+
 from ship import Ship
 
 from bullet import Bullet
@@ -33,7 +35,7 @@ class AlienInvasion: #Overall class to manage game assets and behavior
 
         self._create_fleet()
 
-        #self.bg_color = (230,230,230) #to set background color
+        self.play_button = Button(self, "Play") #to make the play button
 
     def run_game(self): #Start the main loop for the game
         while True: #manages screen updates, runs continually
@@ -54,6 +56,9 @@ class AlienInvasion: #Overall class to manage game assets and behavior
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self._check_play_button(mouse_pos)
                 
     def _check_keydown_events(self, event):
         if event.key == pygame.K_RIGHT:
@@ -156,6 +161,10 @@ class AlienInvasion: #Overall class to manage game assets and behavior
                 self._ship_hit
                 break
 
+    def _check_play_button(self, mouse_pos): #to start a new game when the player clicks the Play button
+        if self.play_button.rect.collidepoint(mouse_pos):
+            self.stats.game_active = True 
+
     def _update_screen(self): #to update images on the screen, and flip to the new screen
             self.screen.fill(self.settings.bg_color) #to fill the background and redraw the screen during each pass thru the loop
 
@@ -165,6 +174,9 @@ class AlienInvasion: #Overall class to manage game assets and behavior
                 bullet.draw_bullet()
 
             self.aliens.draw(self.screen)
+
+            if not self.stats.game_active: #to draw the play button if the game is inactive
+                self.play_button.draw_button()
     
             pygame.display.flip() # Make the most recently drawn screen visible
 if __name__ == '__main__':
